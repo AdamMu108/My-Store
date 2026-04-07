@@ -1,0 +1,43 @@
+<div class="product-details-container">
+  <button class="back-button" (click)="goBack()">← Back to Products</button>
+
+  <div *ngIf="isLoading" class="loading">Loading product details...</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && product" class="product-details">
+    <div class="product-image-section">
+      <img [src]="product.image" [alt]="product.name" class="product-image">
+    </div>
+
+    <div class="product-info-section">
+      <h1 class="product-name">{{ product.name }}</h1>
+      <p class="product-id">Product ID: {{ product.id }}</p>
+      
+      <div class="product-description">
+        <h3>Description</h3>
+        <p>{{ product.description }}</p>
+      </div>
+
+      <div class="product-price">
+        <p class="price-tag">${{ product.price }}</p>
+      </div>
+
+      <div *ngIf="cartMessage" class="cart-message">
+        {{ cartMessage }}
+      </div>
+
+      <div class="add-to-cart-section">
+        <div class="quantity-selector">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1" [(ngModel)]="quantity" class="quantity-input">
+        </div>
+        <button (click)="addToCart()" class="add-to-cart-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !product && !errorMessage" class="error">
+    Product not found.
+  </div>
+</div>

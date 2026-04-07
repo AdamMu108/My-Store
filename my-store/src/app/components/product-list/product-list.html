@@ -1,0 +1,37 @@
+<div class="product-list-container">
+  <div class="header">
+    <h1>Our Products</h1>
+    <a routerLink="/cart" class="cart-link">View Cart</a>
+  </div>
+
+  <div *ngIf="cartMessage" class="cart-message">
+    {{ cartMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Loading products...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-state">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && products.length === 0" class="no-products">
+    <p>No products available.</p>
+  </div>
+
+  <div *ngIf="!isLoading && products.length > 0" class="products-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <img [src]="product.image" [alt]="product.name" class="product-image">
+      <div class="product-content">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">${{ product.price }}</p>
+        <div class="product-actions">
+          <button (click)="addToCart(product)" class="add-to-cart-btn">Add to Cart</button>
+          <a [routerLink]="['/product', product.id]" class="details-link">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

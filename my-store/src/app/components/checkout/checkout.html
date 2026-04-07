@@ -1,0 +1,128 @@
+<div class="checkout-container">
+  <div class="checkout-header">
+    <h1>Checkout</h1>
+    <button class="back-button" (click)="cancelCheckout()">Back to Cart</button>
+  </div>
+
+  <div class="checkout-content">
+    <div class="checkout-form">
+      <form (ngSubmit)="submitForm()" novalidate>
+        <div class="form-section">
+          <h2>Billing Information</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" [(ngModel)]="form.firstName" name="firstName" required>
+              <span *ngIf="errors['firstName']" class="error-message">{{ errors['firstName'] }}</span>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" [(ngModel)]="form.lastName" name="lastName" required>
+              <span *ngIf="errors['lastName']" class="error-message">{{ errors['lastName'] }}</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" [(ngModel)]="form.email" name="email" required>
+              <span *ngIf="errors['email']" class="error-message">{{ errors['email'] }}</span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" [(ngModel)]="form.phone" name="phone" required>
+              <span *ngIf="errors['phone']" class="error-message">{{ errors['phone'] }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Shipping Address</h2>
+
+          <div class="form-group full-width">
+            <label for="address">Street Address *</label>
+            <input type="text" id="address" [(ngModel)]="form.address" name="address" required>
+            <span *ngIf="errors['address']" class="error-message">{{ errors['address'] }}</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City *</label>
+              <input type="text" id="city" [(ngModel)]="form.city" name="city" required>
+              <span *ngIf="errors['city']" class="error-message">{{ errors['city'] }}</span>
+            </div>
+
+            <div class="form-group">
+              <label for="state">State *</label>
+              <input type="text" id="state" [(ngModel)]="form.state" name="state" required>
+              <span *ngIf="errors['state']" class="error-message">{{ errors['state'] }}</span>
+            </div>
+
+            <div class="form-group">
+              <label for="zipCode">Zip Code *</label>
+              <input type="text" id="zipCode" [(ngModel)]="form.zipCode" name="zipCode" required placeholder="12345">
+              <span *ngIf="errors['zipCode']" class="error-message">{{ errors['zipCode'] }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Payment Information</h2>
+
+          <div class="form-group full-width">
+            <label for="cardNumber">Card Number *</label>
+            <input type="text" id="cardNumber" [(ngModel)]="form.cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456">
+            <span *ngIf="errors['cardNumber']" class="error-message">{{ errors['cardNumber'] }}</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cardExpiry">Expiry Date *</label>
+              <input type="text" id="cardExpiry" [(ngModel)]="form.cardExpiry" name="cardExpiry" required placeholder="MM/YY">
+              <span *ngIf="errors['cardExpiry']" class="error-message">{{ errors['cardExpiry'] }}</span>
+            </div>
+
+            <div class="form-group">
+              <label for="cardCVC">CVC *</label>
+              <input type="text" id="cardCVC" [(ngModel)]="form.cardCVC" name="cardCVC" required placeholder="123">
+              <span *ngIf="errors['cardCVC']" class="error-message">{{ errors['cardCVC'] }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="cancelCheckout()" [disabled]="isSubmitting">Cancel</button>
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">Complete Purchase</span>
+            <span *ngIf="isSubmitting">Processing...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="order-summary">
+      <div class="summary-card">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>${{ cartTotal }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (8%):</span>
+          <span>${{ (cartTotal * 0.08).toFixed(2) }}</span>
+        </div>
+        <div class="summary-total">
+          <span>Total:</span>
+          <span>${{ (cartTotal + cartTotal * 0.08).toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
