@@ -1,59 +1,84 @@
 # MyStore
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+MyStore is a single-page e-commerce application built with Angular. It displays a product catalog, allows users to view product details, add items to cart, update quantities, remove items, complete checkout with form validation, and see an order confirmation page.
 
-## Development server
+The app uses local product data from data.json and serves product images from the project images folder.
 
-To start a local development server, run:
+## Setup and Run
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. Open the app:
 
-## Code scaffolding
+http://localhost:4200/
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Application Flow
 
-```bash
-ng generate component component-name
-```
+1. The app loads the Products page and fetches product data via HttpClient.
+2. Users can open product details or add products to cart.
+3. The Cart page shows selected items, supports quantity updates/removal, and displays total cost.
+4. Users proceed to Checkout, complete validated form fields, and place the order.
+5. The app clears the cart and navigates to Order Confirmation.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Component Structure
 
-```bash
-ng generate --help
-```
+- App (`src/app/app.ts`)
+  - Root shell with router outlet.
+  - Subscribes to cart state and passes cart item count to header.
+- AppHeader (`src/app/components/app-header`)
+  - Child of App.
+  - Uses Input for cart count and Output event to request navigation.
+- ProductList (`src/app/components/product-list`)
+  - Shows all products using ngFor.
+  - Sends add-to-cart actions to CartService.
+- ProductDetails (`src/app/components/product-details`)
+  - Shows single product image, name, price, and description.
+  - Supports quantity input with ngModel and ngModelChange.
+- Cart (`src/app/components/cart`)
+  - Displays cart items and dynamic totals.
+  - Supports quantity updates and remove actions.
+  - Shows feedback when items are removed.
+- Checkout (`src/app/components/checkout`)
+  - Collects billing/shipping/payment inputs.
+  - Validates user input before submitting order.
+- OrderConfirmation (`src/app/components/order-confirmation`)
+  - Shows success message, order number, and order date.
 
-## Building
+## Services and Models
 
-To build the project run:
+- ProductService (`src/app/services/product.service.ts`)
+  - Fetches product data from data.json using HttpClient.
+- CartService (`src/app/services/cart.service.ts`)
+  - Central cart state for sibling components.
+  - Handles add, remove, quantity update, totals, and localStorage persistence.
+- Product Model (`src/app/models/product.ts`)
+  - Strong typing for product fields.
+- CartItem Model (`src/app/models/cart-item.ts`)
+  - Typed structure for cart entries.
 
-```bash
-ng build
-```
+## Routing
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Routes are configured in `src/app/app.routes.ts`:
 
-## Running unit tests
+- /products
+- /product/:id
+- /cart
+- /checkout
+- /confirmation
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+The app uses router-outlet and routerLink for SPA navigation without full page reload.
 
-```bash
-ng test
-```
+## Build and Test
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Build: `ng build`
+- Unit test: `ng test`

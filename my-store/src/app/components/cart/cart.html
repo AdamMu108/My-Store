@@ -1,4 +1,8 @@
 <div class="cart-container">
+  <div *ngIf="cartMessage" class="cart-toast" role="status" aria-live="polite">
+    {{ cartMessage }}
+  </div>
+
   <div class="cart-header">
     <h1>Shopping Cart</h1>
     <button class="continue-shopping-btn" (click)="continueShopping()">Continue Shopping</button>
