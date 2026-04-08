@@ -1,0 +1,15 @@
+<header class="site-header">
+  <div class="header-shell">
+    <button type="button" class="brand-button" (click)="goToProducts()">
+      MyStore
+    </button>
+
+    <nav class="header-nav" aria-label="Primary">
+      <button type="button" class="nav-button" (click)="goToProducts()">Products</button>
+      <button type="button" class="nav-button cart-button" (click)="goToCart()">
+        Cart
+        <span class="cart-badge" [class.is-empty]="cartItemCount === 0">{{ cartItemCount }}</span>
+      </button>
+    </nav>
+  </div>
+</header>

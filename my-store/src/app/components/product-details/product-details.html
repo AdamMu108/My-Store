@@ -30,7 +30,7 @@
       <div class="add-to-cart-section">
         <div class="quantity-selector">
           <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" min="1" [(ngModel)]="quantity" class="quantity-input">
+          <input type="number" id="quantity" min="1" [(ngModel)]="quantity" (ngModelChange)="onQuantityChange($event)" class="quantity-input">
         </div>
         <button (click)="addToCart()" class="add-to-cart-btn">Add to Cart</button>
       </div>

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Product } from '../../models/product';
-import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -19,43 +17,21 @@ export class ProductList implements OnInit {
   errorMessage: string = '';
 
   constructor(
-    private productService: ProductService,
-    private cartService: CartService,
-    private router: Router
+    private route: ActivatedRoute,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      if (event.urlAfterRedirects === '/products') {
-        this.loadProducts();
-      }
-    });
+    const resolvedProducts = this.route.snapshot.data['products'] as Product[] | undefined;
 
-    setTimeout(() => {
-      if (this.router.url === '/products') {
-        this.loadProducts();
-      }
-    }, 0);
-  }
+    if (resolvedProducts && resolvedProducts.length > 0) {
+      this.products = resolvedProducts;
+      this.isLoading = false;
+      return;
+    }
 
-  loadProducts(): void {
-    this.isLoading = true;
-    this.errorMessage = '';
-
-    this.productService.getProducts().subscribe({
-      next: (data: Product[]) => {
-        this.products = data;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading products:', error);
-        this.products = [];
-        this.isLoading = false;
-        this.errorMessage = 'Unable to load products right now.';
-      }
-    });
+    this.errorMessage = 'Unable to load products right now.';
+    this.isLoading = false;
   }
 
   addToCart(product: Product): void {

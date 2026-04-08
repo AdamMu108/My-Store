@@ -25,6 +25,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "../images",
+                "output": "images"
+              },
+              {
+                "glob": "**/*",
                 "input": "src/assets"
               }
             ],

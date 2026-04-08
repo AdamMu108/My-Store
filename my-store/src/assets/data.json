@@ -1,44 +1,30 @@
 [
   {
     "id": 1,
-    "name": "Phone XL",
-    "price": 799,
-    "description": "A large phone with an even larger screen",
-    "image": "https://via.placeholder.com/300x300?text=Phone+XL"
+    "name": "Asus TUF 15F",
+    "price": 1299,
+    "description": "A gaming laptop with strong performance for work and play.",
+    "image": "/images/Asus%20tuf%2015f.webp"
   },
   {
     "id": 2,
-    "name": "Phone Mini",
-    "price": 699,
-    "description": "A compact phone for those who prefer smaller devices",
-    "image": "https://via.placeholder.com/300x300?text=Phone+Mini"
+    "name": "PlayStation 5",
+    "price": 549,
+    "description": "Next-generation console with fast loading and immersive gameplay.",
+    "image": "/images/Playtaion%205.webp"
   },
   {
     "id": 3,
-    "name": "Phone Standard",
-    "price": 999,
-    "description": "The standard phone - perfect for everyone",
-    "image": "https://via.placeholder.com/300x300?text=Phone+Standard"
+    "name": "Samsung S26 Ultra",
+    "price": 1199,
+    "description": "A flagship smartphone with premium display and camera features.",
+    "image": "/images/S26%20Ultra.jpg"
   },
   {
     "id": 4,
-    "name": "Laptop Pro",
-    "price": 1999,
-    "description": "A powerful laptop for professionals",
-    "image": "https://via.placeholder.com/300x300?text=Laptop+Pro"
-  },
-  {
-    "id": 5,
-    "name": "Tablet Plus",
-    "price": 599,
-    "description": "A versatile tablet for work and entertainment",
-    "image": "https://via.placeholder.com/300x300?text=Tablet+Plus"
-  },
-  {
-    "id": 6,
-    "name": "Smart Watch",
-    "price": 399,
-    "description": "Keep track of your fitness with this smart watch",
-    "image": "https://via.placeholder.com/300x300?text=Smart+Watch"
+    "name": "Xbox Series X",
+    "price": 499,
+    "description": "Powerful gaming console built for speed and high-resolution gaming.",
+    "image": "/images/Xbox%20Series%20X.jpg"
   }
 ]
